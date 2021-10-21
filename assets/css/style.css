@@ -1,0 +1,23 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+#left_frame {
+    width: 85%;
+}
+
+#right_frame {
+    width: 15%;
+    float:right;
+}
+
+iframe {
+    box-sizing: border-box;
+    overflow:hidden;
+    border:0;
+    height:100vh;
+}
