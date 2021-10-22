@@ -1,0 +1,94 @@
+.title {
+    font-weight:bold;
+    font-size:20px;
+    color:#FFF;
+    text-decoration:underline;
+}
+
+.wrapper	{
+    min-height: 95%;
+    height: auto !important;
+    margin: 0 auto -155px;
+    text-align:center;
+}
+
+*, body {
+    text-align:center;
+}
+
+body {
+    margin-top:15px;
+    color: #FFF;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+a {
+    -moz-box-shadow:inset 0 1px 0 0 #ffffff;
+    -webkit-box-shadow:inset 0 1px 0 0 #ffffff;
+    box-shadow:inset 0 1px 0 0 #ffffff;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background: #ededed;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    text-indent:0;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#777777;
+    font-family: arial, serif;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0 #ffffff;
+    width:80%;
+    cursor:pointer;
+}
+
+a :hover {
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+    background: #dfdfdf;
+}
+
+a :active {
+    position:relative;
+    top:1px;
+}
+
+div:not(.skip)	{
+    display:none;
+    border:1px solid #FFF;
+    color:#FFF;
+}
+
+ul {
+    list-style-type: none;
+}
+table	{
+    border:1px solid #000;
+    width:100%;
+    border-collapse:collapse;
+    text-transform: capitalize;
+    margin-left: auto;
+    margin-right: auto;
+}
+th, td	{
+    border:1px solid #000;
+}
+
+.arena-battle { align-content: center; }
+
+select option {
+    text-transform: capitalize;
+}
+
+select {
+    width:100%;
+}
+
+.combat td, .combat th {
+    border:none;
+}
