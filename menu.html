@@ -73,6 +73,40 @@
                 <div id="bl_jutsu" class="skip"></div>
             </div>
 
+            <h3 class="title" data-rank="1">Train</h3>
+            <div class="train">
+                <form method="POST" id="train_form">
+                    <table>
+                        <tr>
+                            <td>
+                                <select id="training_data">
+                                    <optgroup label="Skills">
+                                        <option value="ninjutsu" data-type="skill">Ninjutsu Skill</option>
+                                        <option value="genjutsu" data-type="skill">Genjutsu Skill</option>
+                                        <option value="taijutsu" data-type="skill">Taijutsu Skill</option>
+                                        <option value="bloodline" data-type="skill">Bloodline Skill</option>
+                                    </optgroup>
+                                    <optgroup label="Attributes">
+                                        <option value="cast_speed" data-type="attributes">Cast Speed</option>
+                                        <option value="speed" data-type="attributes">Speed</option>
+                                        <option value="intelligence" data-type="attributes">Intelligence</option>
+                                        <option value="willpower" data-type="attributes">Willpower</option>
+                                    </optgroup>
+                                </select>
+                            </td>
+                            <td><select name="train_type" id="train_type">
+                                <option value="Short">Short</option>
+                                <option value="Long">Long</option>
+                                <option value="Extended">Extended</option>
+                            </select></td>
+                            <td><input type="submit" value="Train (T)"></td>
+                        </tr>
+                    </table>
+                    <hr />
+                    <a class="link page_training" data-cancel_training="1">Cancel</a>
+                </form>
+            </div>
+
         </menu-options>
 
         <h3>Config</h3>
