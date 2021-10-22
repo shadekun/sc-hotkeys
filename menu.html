@@ -34,6 +34,45 @@
                     </table>
                 </div>
             </div>
+
+            <h3 class="title" data-rank="1">Combat</h3>
+            <div class="combat">
+                <table>
+                    <tr>
+                        <td>Battle:</td>
+                        <td><select id="battle_type"></select></td>
+                        <td>Offense: </td>
+                        <td><select id="jutsu_type"></select></td>
+                    </tr>
+                    <tr>
+                        <td>Weapon:</td>
+                        <td colspan="3">
+                            <select id="weapons">
+                                <option>None</option>
+                                <option value="6" data-rank="1">Kunai (Residual)</option>
+                                <option value="7" data-rank="2">Ninjato (Residual)</option>
+                                <option value="8" data-rank="2">Bo Staff (Daze)</option>
+                                <option value="2" data-rank="3">Kusarigame (Daze)</option>
+                                <option value="5" data-rank="3">Katana (Residual)</option>
+                                <option value="11" data-rank="3">Large Hexagonal Shuriken (Cripple)</option>
+                                <option value="15" data-rank="3">Ancient Fan (Diffuse)</option>
+                                <option value="16" data-rank="4">Chakra Blade (Elemental)</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Jutsu</th>
+                        <th style="text-align:right;"><button id="add_jutsu_slot">+</button></th>
+                    </tr>
+                    </thead>
+                </table>
+                <div id="jutsu_slots" class="skip"></div>
+                <div id="bl_jutsu" class="skip"></div>
+            </div>
+
         </menu-options>
 
         <h3>Config</h3>
