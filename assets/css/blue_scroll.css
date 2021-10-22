@@ -1,0 +1,32 @@
+body {
+    background: url('../img/blue_scroll_bg.png');
+}
+
+input[type=submit], button, a {
+    margin: 4px auto;
+    cursor: pointer;
+    padding: 5px 10px;
+
+    background: #b99f47;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 1px #000000;
+
+    color: #413510;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow:none;
+}
+
+input[type=submit]:hover, button:hover {
+    background: #d1a71c;
+    position: relative;
+    top: 1px;
+}
+
+
+select {
+    margin: 3px;
+    padding: 2px 1px;
+}
