@@ -275,4 +275,35 @@ $(document).ready(function() {
 
     }
 
+    let dom = {
+        template: $("#template"),
+        select: {
+            layout: $("#layout"),
+            bloodline: $("#bloodline"),
+            rank: $("#rank"),
+            train_type: $("#train_type"),
+            training_data: $("#training_data"),
+            users: $(".loadUsers"),
+            battle_type: $("#battle_type"),
+            jutsu_type: $("#jutsu_type"),
+            fetch_jutsu: $(".fetchJutsu"),
+            weapon: $("#weapons"),
+            regen_timer: $("#regen")
+        },
+        clickable: {
+            ai: $(".ai"),
+            attack_user: $("#add_user"),
+            titles: $("h3:not(.skip)"),
+            delete_user: $("#delete_user"),
+            add_jutsu: $("#add_jutsu_slot")
+        },
+        content: {
+            jutsu_slots: $("#jutsu_slots"),
+            bloodline_jutsu: $("#bl_jutsu"),
+            regen_timer: $(".regen")
+        }
+    };
+
+
+
 });
