@@ -511,5 +511,15 @@ $(document).ready(function() {
         element.on('change', onConfigUpdate);
     }
 
+    // Load the bloodline and rank data from the player data
+    populate(dom.select.bloodline, data.bloodlines, player.bloodline);
+    populate(dom.select.rank, data.ranks, player.rank);
+
+    // If we have this information in the player data, load it.
+    for(let attr of ["train_type", "training_data", "layout"]) {
+        dom.select[attr].val(player[attr]);
+        dom.select[attr].on('change', onConfigUpdate);
+    }
+
 
 });
