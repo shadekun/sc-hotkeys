@@ -522,4 +522,34 @@ $(document).ready(function() {
     }
 
 
+    // When we change the training type, since it's all stored in one <select>, we need to maintain which 'skill' or 'attribute' it is
+    dom.select.training_data.change(function() {
+        let type = $(this).find(":selected").data('type');
+        $(this).attr('name', type);
+    });
+
+    // For menu.html, iterate over all links that contain a page_X notation and make it point to that page.
+    for(let page in data.pages) {
+        $(`.page_${page}`).each(function() {
+            let id = `?id=${data.pages[page]}`;
+            if($(this).data())
+                for(const [k, v] of Object.entries($(this).data()))
+                    id += `&${k}=${v}`;
+            $(this).attr('href', id);
+        })
+    }
+
+    dom.clickable.attack_user.click(function() {
+        player.addAttackUser($("#userId").val(), $("#userName").val());
+    });
+
+    dom.clickable.delete_user.click(function() {
+        player.removeAttackUser($(".loadUsers option:selected").val());
+    });
+
+    populate(dom.select.battle_type, { [data.pages.arena]: {name: "AI" }, [data.pages.missions]: {name: "Mission" }, [data.pages.battle]: {name: "PvP" }, [data.pages.spar]: {name: "Spar" } }, player.battle_type);
+    populate(dom.select.jutsu_type, { ninjutsu: { name: "Ninjutsu" }, genjutsu: { name: "Genjutsu" }, taijutsu: {name: "Taijutsu" } }, player.jutsu_type);
+    populate(dom.select.regen_timer, ["On", "Off"], player.regen);
+
+
 });
