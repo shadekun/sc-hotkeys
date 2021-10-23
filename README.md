@@ -2,6 +2,8 @@
 
 Back in the day, I didn't really use it for more than travel & having all of my jutsu in combat.
 
+I intended on implementing a quick-transfer for AK / Yen and Missions but I don't know how actively those features are requested and the primary functionality seems to be combat-related. If you want to see those features get implemented, see the disclaimer below.
+
 Site has best compatibility with Mozilla it seems since Chrome has different default settings for Secure/SameSite cookie/Iframe embedding nowadays.
 
 If you want to use it in chrome:
