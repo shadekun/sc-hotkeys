@@ -565,4 +565,43 @@ $(document).ready(function() {
     // Verify all links and forms go to the right frame
     checkLinks();
 
+
+    let keys = {
+        // travel
+        WEST: 37, NORTH: 38, EAST: 39, SOUTH: 40,
+        // Action
+        SCOUT: 83, MISSION: 77, ACCEPT_MISSION: 78, TRAIN: 84,
+        // Attacking
+        ATTACK_USER: 65, BATTLE: 66
+    };
+
+    function catchKey(event) {
+        let code = event.which, page = '', frame = top.frames["game"];
+        if(frame) {
+            if (code === keys.WEST || code === keys.NORTH || code === keys.EAST || code === keys.SOUTH) {
+                let directions = { [keys.WEST]: 'west', [keys.NORTH]: 'north', [keys.EAST]: 'east', [keys.SOUTH]: 'south' };
+                page = '?id=' + data.pages.travel + '&travel=' + directions[code];
+            }
+            else if (code === keys.MISSION)
+                page = '?id=' + data.pages.missions;
+            else if (code === keys.SCOUT)
+                page = '?id=' + data.pages.battle;
+            else if (code === keys.ACCEPT_MISSION)
+                page = '?id=' + data.pages.missions + '&start_mission=7';
+            else if (code === keys.ATTACK_USER)
+                page = '?id=' + data.pages.battle + '&attack=' + dom.select.users.val();
+            else if (code === keys.TRAIN)
+                dom.clickable.train.submit();
+            else if(code === keys.BATTLE)
+                page = '?id=' + player.battle_type;
+            if (page !== '')
+                frame.location.href = data.domain + page;
+        }
+    }
+
+    $(document).on('keydown', (event) => {
+        if (!$("input").is(":focus"))
+            catchKey(event);
+    });
+
 });
