@@ -2,44 +2,11 @@ $(document).ready(function() {
 
     let data = {
             domain: "https://shinobichronicles.com/",
-            layouts: [ "shadow_ribbon", "classic_blue", "geisha", "blue_scroll"],
             training: {
-                cancel: "&cancel_training=1",
-                durations: [ "Short", "Long", "Extended"],
-                methods: [
-                    {
-                        name: "ninjutsu",
-                        type: "skill"
-                    },
-                    {
-                        name: "genjutsu",
-                        type: "skill"
-                    },
-                    {
-                        name: "taijutsu",
-                        type: "skill"
-                    },
-                    {
-                        name: "bloodline",
-                        type: "skill"
-                    },
-                    {
-                        name: "cast_speed",
-                        type: "attributes"
-                    },
-                    {
-                        name: "speed",
-                        type: "attributes"
-                    },
-                    {
-                        name: "intelligence",
-                        type: "attributes"
-                    },
-                    {
-                        name: "willpower",
-                        type: "attributes"
-                    }
-                ]
+                methods: {
+                    skill: ["ninjutsu", "genjutsu", "taijutsu", "bloodline"],
+                    attributes: ["speed", "cast_speed", "intelligence", "willpower"]
+                }
             },
             ai: {
                 1: [
