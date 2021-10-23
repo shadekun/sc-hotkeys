@@ -253,4 +253,26 @@ $(document).ready(function() {
             }
         };
 
+
+    function checkLinks() {
+        $("a:not(.skip)").each(function () {
+            let currentHref = $(this).attr('href');
+            if (currentHref && currentHref.indexOf(data.domain) === -1) {
+                let newAction = data.domain + currentHref;
+                $(this).attr('target', 'game');
+                $(this).attr('href', newAction);
+            }
+        });
+
+        $("form").each(function () {
+            let currentAction = $(this).attr('action');
+            if (currentAction && currentAction.indexOf(data.domain) === -1) {
+                let newAction = data.domain + currentAction;
+                $(this).attr('target', 'game');
+                $(this).attr('action', newAction);
+            }
+        });
+
+    }
+
 });
