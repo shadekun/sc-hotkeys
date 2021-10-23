@@ -552,4 +552,17 @@ $(document).ready(function() {
     populate(dom.select.regen_timer, ["On", "Off"], player.regen);
 
 
+    // Populate a jutsu slot when a user clicks the plus button
+    dom.clickable.add_jutsu.click(function() { player.addJutsuSlot(dom.select.jutsu_type.val()) });
+
+    // Update the weapon when it is changed
+    dom.select.weapon.change(function() { player.persistData({ weapon: $(this).val() }); });
+
+    // Update the regen timer when it is changed
+    dom.select.regen_timer.change(function() { player.persistData({ regen: $(this).val() }); });
+
+
+    // Verify all links and forms go to the right frame
+    checkLinks();
+
 });
