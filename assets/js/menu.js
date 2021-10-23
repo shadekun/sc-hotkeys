@@ -295,7 +295,8 @@ $(document).ready(function() {
             attack_user: $("#add_user"),
             titles: $("h3:not(.skip)"),
             delete_user: $("#delete_user"),
-            add_jutsu: $("#add_jutsu_slot")
+            add_jutsu: $("#add_jutsu_slot"),
+            train: $("#train_form")
         },
         content: {
             jutsu_slots: $("#jutsu_slots"),
