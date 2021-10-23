@@ -477,6 +477,39 @@ $(document).ready(function() {
     (!localStorage.getItem('player')) ? player.persistData() : player.loadData();
 
 
+    // Actual menu configuration
+
+    // dropdowns
+    dom.clickable.titles.click(function() { $(this).next().slideToggle(); });
+
+    // Update the player on select changes
+    function onConfigUpdate(evt) {
+        let target = $(evt.target);
+        player[target.attr('id')] = target.val();
+        player.persistData();
+    }
+
+    // Iterate over an array such that ["Name" => "Name"]
+    function populateArray(collection, attribute) {
+        let html = "";
+        for (let item of collection)
+            html += `<option value='${item}' ${attribute === item ? 'selected' : ''}>${item.replace("_", " ")}</option>`;
+        return html;
+    }
+
+    // 'Can't iterate over an object' ==> But we can iterate over an array of Objects such that ["Key" => "Value"]
+    function populateObject(collection, attribute) {
+        let html = "";
+        for(const [key, value] of Object.entries(collection))
+            html += `<option value='${key}' ${attribute === key ? 'selected' : ''}>${value.name.replace("_", " ")}</option>`;
+        return html;
+    }
+
+    // Does the same as above, however, takes a dom element & determines which method to run
+    function populate(element, collection, attribute) {
+        element.html(Array.isArray(collection) ? populateArray(collection, attribute) : populateObject(collection, attribute));
+        element.on('change', onConfigUpdate);
+    }
 
 
 });
