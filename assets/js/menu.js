@@ -305,6 +305,178 @@ $(document).ready(function() {
         }
     };
 
+    let player = {
+        layout: 'shadow_ribbon',
+        bloodline: null,
+        rank: 1,
+        jutsu_slots: [],
+        battle_type: data.pages.arena,
+        train_type: "Short",
+        training_data: "ninjutsu",
+        attack_users: [],
+        last_user: "None",
+        weapon: "None",
+        jutsu_type: "all",
+        regen: "On",
+        addAttackUser: function(userid, username) {
+            this.attack_users.push({ userId: userid, userName: username });
+            this.persistData();
+        },
+        removeAttackUser: function(userId) {
+            let newUsers = [];
+            for(let user of this.attack_users) {
+                if(user.userId === userId)
+                    continue;
+                newUsers.push({ userId: user.userId, userName: user.userName });
+            }
+            this.attack_users = newUsers;
+            this.persistData();
+        },
+        addJutsuSlot: function(type) {
+            this.jutsu_slots.push({ jutsu: data.ranks[this.rank].jutsu[type][0].id, offense: type });
+            this.persistData();
+        },
+        updateMenu: function() {
+
+            // set template data on load
+            dom.template.attr("href", `assets/css/${this.layout}.css`);
+
+            // set default value on page load
+            dom.select.training_data.attr('name', data.training.methods.skill.includes(this.training_data) ? 'skill' : 'attributes');
+
+            // Load the weapon if it is stored
+            if(this.weapon !== 'None')
+                dom.select.weapon.val(this.weapon);
+
+            // Hide stuff their rank can't normally see.
+            $("[data-rank]").each(function() { player.rank < $(this).data('rank') ? $(this).hide() : $(this).show() });
+
+            dom.content.regen_timer[this.regen === "Off" ? 'hide' : 'show']();
+
+            // Populate the AI
+            dom.clickable.ai.html("");
+            for (let ai of data.ai[this.rank])
+                dom.clickable.ai.append(`<a href='?id=${data.pages.arena}&fight=${ai.id}'>${ai.name} (&yen;${ai.money})</a><br />`);
+
+            // set the form action attribute for training
+            dom.clickable.train.attr('action', `?id=${data.pages.training}`);
+
+            // If the user has added any attack-able users
+            if(this.attack_users.length > 0)
+            {
+                dom.select.users.empty();
+                for(let user of this.attack_users)
+                    dom.select.users.append(`<option value='${user.userId}'>${user.userName}</option>`);
+            }
+            else dom.select.users.html(`<option>No Users Added</option>`);
+
+            // If the user has created any jutsu slots, populate them
+            if(this.jutsu_slots.length > 0) {
+                dom.content.jutsu_slots.html("");
+                for(let jutsu of this.jutsu_slots) {
+                    let combat_form = `
+                        <form action="?id=${this.battle_type}" method="POST">
+                            <input type="hidden" class="jutsuType" name="jutsu_type" value="${jutsu.offense}">
+                            <input type="hidden" class="weaponID" name="weapon_id" value="${this.weapon}">
+                            <input type="hidden" class="jutsuID" name="jutsu_id" value="${jutsu.jutsu}">
+                            <table>
+                                <tr>
+                                    <td style="width:70%;"><select name="hand_seals" class="fetchJutsu" data-offense="${jutsu.offense}"></select></td>
+                                    <td style="width:20%;"><input class="use_jutsu" type="submit" name="attack" value="Use"></td>
+                                    <td style="width:10%;"><button class="delete_jutsu_slot">-</button></td>
+                                </tr>
+                            </table>
+                        </form>
+                    `;
+                    dom.content.jutsu_slots.append(combat_form);
+                }
+            }
+            else dom.content.jutsu_slots.html("");
+
+            // If the user has a bloodline, populate the bloodline jutsu
+            if(this.bloodline && this.bloodline !== 'None') {
+                dom.content.bloodline_jutsu.html("");
+                for(let jutsu of data.bloodlines[this.bloodline].jutsu) {
+                    let combat_form = `
+                            <form action="?id=${this.battle_type}" method="POST">
+                                <input type="hidden" id="jutsuType" name="jutsu_type" value="bloodline_jutsu">
+                                <input type="hidden" id="jutsuID" name="jutsu_id" value="${jutsu.id}">
+                                <input id="submitbtn" type="submit" name="attack" value="${jutsu.name}">
+                            </form>
+                    `;
+                    dom.content.bloodline_jutsu.append(combat_form);
+                }
+            }
+            else dom.content.bloodline_jutsu.html("");
+
+            dom.select.fetch_jutsu = $(".fetchJutsu");
+            dom.clickable.delete_jutsu = $(".delete_jutsu_slot");
+
+            // on delete, remove the jutsu slot
+            dom.clickable.delete_jutsu.click(function() {
+                let slot = dom.clickable.delete_jutsu.index(this);
+                player.jutsu_slots.splice(slot, 1);
+                player.persistData();
+                dom.clickable.delete_jutsu = $(".delete_jutsu_slot");
+            });
+
+            // on change, update the jutsu slot
+            dom.select.fetch_jutsu.change(function() {
+                let slot = dom.select.fetch_jutsu.index(this);
+                player.jutsu_slots[slot] = { jutsu: $(this).find(":selected").data('jid'), offense: $(this).find(":selected").data('type')};
+                player.persistData();
+            });
+
+            // set the weapon
+            $(".weaponID").val(this.weapon);
+
+            // Load the jutsu that the user has stored
+            dom.select.fetch_jutsu.each(function(i) {
+                $(this).html("");
+                let offense = $(this).data('offense');
+                let jutsus = [];
+                for(let [id, rankInfo] of Object.entries(data.ranks))
+                    if(id <= player.rank)
+                        jutsus = jutsus.concat(rankInfo.jutsu[offense]);
+
+                for(let jutsu of jutsus) {
+                    let option = $("<option />").attr("data-jid", jutsu.id).attr('data-type', offense).val(jutsu.hand_seals).text(jutsu.name);
+                    if(option.data('jid') === player.jutsu_slots[i].jutsu)
+                        option.attr('selected', true);
+                    $(this).append(option);
+                }
+            });
+
+            checkLinks();
+        },
+        loadData: function() {
+            let playerData = JSON.parse(localStorage.getItem('player'));
+            this.regen = playerData.regen;
+            this.layout = playerData.layout;
+            this.bloodline = playerData.bloodline;
+            this.rank = playerData.rank;
+            this.battle_type = playerData.battle_type;
+            this.training_data = playerData.training_data;
+            this.train_type = playerData.train_type;
+            this.attack_users = playerData.attack_users;
+            this.jutsu_type = playerData.jutsu_type;
+            this.jutsu_slots = playerData.jutsu_slots;
+            this.weapon = playerData.weapon;
+            this.updateMenu();
+        },
+        persistData: function(updateInfo) {
+            if(updateInfo)
+                for(const [key, value] of Object.entries(updateInfo))
+                    this[key] = value;
+            localStorage.setItem('player', JSON.stringify(this));
+            this.loadData();
+        }
+    };
+
+    // Load persistent user data
+    (!localStorage.getItem('player')) ? player.persistData() : player.loadData();
+
+
 
 
 });
