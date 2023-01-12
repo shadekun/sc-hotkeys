@@ -223,7 +223,8 @@ $(document).ready(function() {
                 45:{name:"Frigid Tundra",jutsu:[{id:0,name:"Icicle Shrapnel",rank:"2",hand_seals:"523",type:"ninjutsu"},{id:1,name:"Crippling Cold",rank:"3",hand_seals:"524",type:"ninjutsu"},{id:2,name:"Awakening Storm",rank:"4",hand_seals:"525",type:"ninjutsu"}]},
                 46:{name:"Ancient&#039;s Strength",jutsu:[{id:0,name:"Crushing Power",rank:"2",hand_seals:"526",type:"taijutsu"},{id:1,name:"Unfathomable Density",rank:"3",hand_seals:"527",type:"taijutsu"},{id:2,name:"Might of the Gods",rank:"4",hand_seals:"528",type:"taijutsu"}]},
                 47:{name:"Eyes of God",jutsu:[{id:0,name:"Molecular Disintegration",rank:"2",hand_seals:"529",type:"ninjutsu"},{id:1,name:"Divine Beasts",rank:"3",hand_seals:"530",type:"ninjutsu"},{id:2,name:"God&#039;s Awakening",rank:"4",hand_seals:"531",type:"ninjutsu"}]},
-                49:{name:"Captain&#039;s Boot",jutsu:[{id:0,name:"Getting The Boot",rank:"4",hand_seals:"666",type:"ninjutsu"}]}
+                49:{name:"Captain&#039;s Boot",jutsu:[{id:0,name:"Getting The Boot",rank:"4",hand_seals:"666",type:"ninjutsu"}]},
+                50:{name:"Ancient&#039;s Deception",jutsu:[{id:0,name:"Party Tricks",rank:"2",hand_seals:"9000",type:"genjutsu"},{id:1,name:"Now You See Me",rank:"3",hand_seals:"9001",type:"genjutsu"},{id:2,name:"The Grand Illusion",rank:"4",hand_seals:"9002",type:"genjutsu"}]},
             },
             pages: {
                 profile: 1,
