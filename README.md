@@ -8,7 +8,7 @@ I intended on implementing a quick-transfer for AK / Yen and Missions but I don'
 1. Open this link https://shinobichronicles.com
 2. Open the developer console (F12)
 3. Paste: `document.cookie = document.cookie + ";path=/;Secure=1;SameSite=None";`
-4. Then load the external site (whether hosted on your machine or through the one hosted on the repository at https://sc.streamcommunity.app)
+4. Then load the external site (whether hosted on your machine or through the one hosted on the repository at https://sc.shadekun.com)
 
 
 Disclaimer: I do not actively play this game. I've verified most of the content is about what it should be but since there are updates regularly to it now, some jutsu/bloodlines may be missing or have invalid information.
